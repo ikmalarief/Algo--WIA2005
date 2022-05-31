@@ -1,1 +1,1 @@
-# Algo--WIA2005
+Moonbucks is a coffee chain that has stores located all over the world. The company is constantly looking at running better logistics as well as expansion to open more stores at strategic locations. You and your team have been hired to do analysis and provide insights to the management for making business decisions. 
