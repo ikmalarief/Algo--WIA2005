@@ -1,0 +1,9 @@
+print(positive_list)
+w = Counter(positive_list)
+print(w)
+print(positive_count)
+
+print(negative_list)
+y = Counter(negative_list)
+print(y)
+print(negative_count)
