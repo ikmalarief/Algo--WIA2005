@@ -4,11 +4,8 @@ import string
 from collections import Counter
 import plotly.express as px
 
-
-
-
 # reading text file
-text = open("read.txt", encoding="utf-8").read()
+text = open('Moonbucks Problem 1/read.txt', encoding="utf-8").read()
 
 # converting to lowercase
 lower_case = text.lower()
@@ -31,33 +28,25 @@ stop_words = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you"
               "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
 
 # Removing stop words from the tokenized words list
-final_words = tokenized_words
 
-##for word in tokenized_words:
-   ## if word not in stop_words:
-    ##    final_words.append(word)
-
-# NLP Emotion Algorithm
-# 1) Check if the word in the final word list is also present in emotion.txt
-#  - open the emotion file
-#  - Loop through each line and clear it
-#  - Extract the word and emotion using split
-
-# 2) If word is present -> Add the emotion to emotion_list
-# 3) Finally count each emotion in the emotion list
+final_words = []
+for word in tokenized_words:
+    if word not in stop_words:
+        final_words.append(word)
 
 positive_list = []
 positive_count = 0
 positive_list2 = []
 goodwordtracking = []
-with open("positive.txt", 'r') as file:
+
+with open("Moonbucks Problem 1/positive.txt", 'r') as file:
     for line in file:
         word = line.strip()
         positive_word = word.lower()
         positive_list2.append(positive_word)
 
           
-for x in range(0,len(tokenized_words),1):
+for x in range(0,len(final_words),1):
     for y in range(0,len(positive_list2),1):
         if (final_words[x]==positive_list2[y]):
             positive_list.append(positive_list2[y])
@@ -68,31 +57,38 @@ negative_list = []
 negative_count = 0
 negative_list2 = []
 badwordtracking = []
-with open("negative.txt", 'r') as file:
+
+with open("Moonbucks Problem 1/negative.txt", 'r') as file:
     for line in file:
         word = line.strip()
         negative_word = word.lower()
         negative_list2.append(negative_word)
 
-for x in range(0,len(tokenized_words),1):
+for x in range(0,len(final_words),1):
     for y in range(0,len(negative_list2),1):
         if (final_words[x]==negative_list2[y]):
             negative_list.append(negative_list2[y])
             badwordtracking.append(x)
             negative_count=negative_count+1
 
-
+print("List of positive words:")
 w = Counter(positive_list)
 print(w)
+print("Number of positive words:")
 print(positive_count)
+print("\nList of negative words")
 z = Counter(negative_list)
 print(z)
+print("Number of negative words:")
 print(negative_count)
+print("\n")
 
 if (positive_count>negative_count):
     print("Article is positive sentiment")
-else:
+elif (positive_count<negative_count):
     print("Article is negative sentiment")
+else:
+    print("Article is neutral sentiment")
 
 #positive graph
 df = px.data.tips()
